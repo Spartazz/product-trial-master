@@ -2,3 +2,13 @@
     overflow: hidden;
     height: 100%;
 }
+
+.shopping-cart-btn {
+  --primary-color: transparent;
+  --primary-bg-color-light: #606060;
+}
+
+.shopping-cart-btn:hover {
+  --primary-color-hover: #606060;
+  --primary-bg-color-light: white;
+}

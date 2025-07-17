@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from "@angular/core";
+import {Component, OnInit, inject, signal, Output, EventEmitter} from "@angular/core";
 import { Product } from "app/products/data-access/product.model";
 import { ProductsService } from "app/products/data-access/products.service";
 import { ProductFormComponent } from "app/products/ui/product-form/product-form.component";
@@ -32,6 +32,8 @@ const emptyProduct: Product = {
   imports: [DataViewModule, CardModule, ButtonModule, DialogModule, ProductFormComponent],
 })
 export class ProductListComponent implements OnInit {
+  @Output() productAdded = new EventEmitter<Product>();
+
   private readonly productsService = inject(ProductsService);
 
   public readonly products = this.productsService.products;
@@ -58,6 +60,10 @@ export class ProductListComponent implements OnInit {
 
   public onDelete(product: Product) {
     this.productsService.delete(product.id).subscribe();
+  }
+
+  public onAddShoppingCart(product: Product) {
+    this.productAdded.emit(product);
   }
 
   public onSave(product: Product) {
