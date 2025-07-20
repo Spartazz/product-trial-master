@@ -6,11 +6,13 @@
         {{ title }}
     </div>
     <div class="p-toolbar-group-end">
+      <p-button class="shopping-cart-btn" (onClick)="displayShoppingCart()">
         <i class="pi pi-shopping-cart" style="font-size: 2rem"></i>
+      </p-button>
     </div>
 </p-toolbar>
-<p-splitter 
-    [panelSizes]="[20, 80]" 
+<p-splitter
+    [panelSizes]="[20, 80]"
     [style]="{ height: 'calc(100vh - 100px)' }">
     <ng-template pTemplate>
         <div class="w-full">
@@ -23,3 +25,15 @@
         </div>
     </ng-template>
 </p-splitter>
+
+<p-dialog [(visible)]="isDialogVisible"
+          [style]="{ width: '50vw' }"
+          header="Liste des produits du panier">
+  <p-dataView #dv [value]="products()">
+    <ng-template pTemplate="list" let-products>
+      @for (product of products; track product) {
+        <app-shopping-cart/>
+      }
+    </ng-template>
+  </p-dataView>
+</p-dialog>
