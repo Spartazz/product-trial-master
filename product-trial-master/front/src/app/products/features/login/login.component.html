@@ -1,0 +1,49 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Connexion</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          aria-label="Adresse email"
+          [attr.aria-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          formControlName="email"
+          placeholder="Votre email"
+          class="w-full"
+        >
+        <small class="p-error" *ngIf="loginForm.get('email')?.errors?.['email']">
+          Format d'email invalide
+        </small>
+      </div>
+
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input
+          id="password"
+          type="password"
+          autocomplete="off"
+          formControlName="password"
+          placeholder="Votre mot de passe"
+          class="w-full"
+        >
+        <small class="p-error" *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">
+          Le mot de passe est requis
+        </small>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <p-button
+        type="submit"
+        [loading]="isSubmitting"
+        label="Se connecter"
+        class="w-full"
+      ></p-button>
+
+    </form>
+  </div>
+</div>
